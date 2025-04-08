@@ -1,7 +1,9 @@
+// Import `useState` only once
 import { useState } from "react";
 import { CalendarView } from "@/components/calendar-view";
 import { EventProvider } from "@/components/event-context";
 
+// Export `CalendarApp` as the default export
 export default function CalendarApp() {
   const [view, setView] = useState<"year" | "month" | "day">("year");
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
@@ -19,26 +21,22 @@ export default function CalendarApp() {
           </div>
         </header>
         <main className="container py-6">
-          <CalendarView
-            view={view}
-            setView={setView}
-            selectedDate={selectedDate}
-            setSelectedDate={setSelectedDate}
-          />
+          <CalendarView view={view} setView={setView} selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
         </main>
       </div>
     </EventProvider>
   );
 }
 
-// CalendarPage can be renamed and exported as a named export if needed
-const CalendarPage = () => {
+// If you want a separate CalendarPage component, use named exports:
+export const CalendarPage = () => {
   const [eventTitle, setEventTitle] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [createdBy, setCreatedBy] = useState(''); // e.g., 'Nigel'
   const [color, setColor] = useState('#0099FF'); // default color
-
+  
+  // Handle form submission logic
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const eventData = {
@@ -46,16 +44,14 @@ const CalendarPage = () => {
       start: startDate,
       end: endDate,
       createdBy,
-      color
+      color,
     };
-    // Handle form submission logic here
+    // Do something with eventData
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <input value={eventTitle} onChange={(e) => setEventTitle(e.target.value)} />
-      {/* Add other form fields here */}
-      <button type="submit">Create Event</button>
+      {/* Form inputs for eventTitle, startDate, endDate, createdBy */}
     </form>
   );
 };
