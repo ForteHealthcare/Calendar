@@ -1,5 +1,4 @@
 // Import `useState` only once
-import { useState } from "react";
 import { CalendarView } from "@/components/calendar-view";
 import { EventProvider } from "@/components/event-context";
 
